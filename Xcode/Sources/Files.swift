@@ -18,7 +18,7 @@ public func shareFile(_ path: String) -> ((HttpRequest) -> HttpResponse) {
                 responseHeader["Content-Length"] = String(fileSize)
             }
             return .raw(200, "OK", responseHeader, { writer in
-                try? writer.write(file)
+                try? writer.write(file: file)
                 file.close()
             })
         }
@@ -35,7 +35,7 @@ public func shareFilesFromDirectory(_ directoryPath: String, defaults: [String] 
             for path in defaults {
                 if let file = try? (directoryPath + String.pathSeparator + path).openForReading() {
                     return .raw(200, "OK", [:], { writer in
-                        try? writer.write(file)
+                        try? writer.write(file: file)
                         file.close()
                     })
                 }
@@ -53,7 +53,7 @@ public func shareFilesFromDirectory(_ directoryPath: String, defaults: [String] 
             }
 
             return .raw(200, "OK", responseHeader, { writer in
-                try? writer.write(file)
+                try? writer.write(file: file)
                 file.close()
             })
         }
@@ -95,7 +95,7 @@ public func directoryBrowser(_ dir: String) -> ((HttpRequest) -> HttpResponse) {
                     return .notFound()
                 }
                 return .raw(200, "OK", [:], { writer in
-                    try? writer.write(file)
+                    try? writer.write(file: file)
                     file.close()
                 })
             }

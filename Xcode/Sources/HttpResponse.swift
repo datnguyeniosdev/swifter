@@ -13,11 +13,11 @@ public enum SerializationError: Error {
 }
 
 public protocol HttpResponseBodyWriter {
-    func write(_ file: String.File) throws
+    func write(file: String.File) throws
+    func write(_ data: Data) throws
     func write(_ data: [UInt8]) throws
     func write(_ data: ArraySlice<UInt8>) throws
     func write(_ data: NSData) throws
-    func write(_ data: Data) throws
 }
 
 public enum HttpResponseBody {

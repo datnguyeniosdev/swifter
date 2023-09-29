@@ -145,7 +145,7 @@ open class HttpServerIO {
 
         let socket: Socket
 
-        func write(_ file: String.File) throws {
+        func write(file: String.File) throws {
             try socket.writeFile(file)
         }
 
